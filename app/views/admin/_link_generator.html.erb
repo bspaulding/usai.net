@@ -1,4 +1,4 @@
-<% @pages = Category.find(:first).pages %>
+<% @pages = Category.first.pages %>
 
 <div id="modal_float" style="display:none;">
 
@@ -9,7 +9,7 @@
 <h1>Link Generator</h1>
 <div id="spinner" style="float:right;display:none;"><img src="/images/spinner.gif"></div>
 <b>Category:</b> <select name="category_id" id="category_id">
-		    		<%= option_groups_from_collection_for_select(Section.find(:all), :categories, :name, :id, :name) %>
+		    		<%= option_groups_from_collection_for_select(Section.all, :categories, :name, :id, :name) %>
 		  		 </select>
 
 <%= observe_field	:category_id,
@@ -29,7 +29,7 @@
 					:complete => "Element.hide('spinner')",
 					:url => {:controller => 'admin', :action => 'gen_link_for_page'},
 					:with => "'id=' + encodeURIComponent(value)" %>
-					
+
 	<div id="generated_link">
 		<%= h("<a href=\"#{url_for @pages.first}\">#{@pages.first.name}</a>") if @pages.count > 0 %>
 	</div>
