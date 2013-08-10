@@ -36,7 +36,9 @@ $(document).ready(function() {
 </div>
 
 <script type="text/javascript" language="JavaScript">
-startTicker();
+  $(document).ready(function() {
+    startTicker();
+  });
 </script>
 
 <div id="ticker">
@@ -45,7 +47,9 @@ startTicker();
 </div>
 
 <script type="text/javascript" language="JavaScript">
-startTicker_Testimony();
+  $(document).ready(function() {
+    startTicker_Testimony();
+  });
 </script>
 
 <div id="customer_quotes_block" onmouseover="pauseTicker_Testimony()" onmouseout="restartTicker_Testimony()">
