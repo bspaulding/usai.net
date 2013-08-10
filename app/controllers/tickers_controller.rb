@@ -5,9 +5,9 @@ class TickersController < ApplicationController
 		#headers['content-type'] = 'text/javascript'
 		render :layout => false
 	end
-	
+
 	def testimonials
-		@testimonials = Testimonial.find(:all, :order => "updated_at DESC")
+		@testimonials = Testimonial.find(:all).shuffle
 		headers['content-type'] = 'text/javascript'
 		render :layout => false
 	end
