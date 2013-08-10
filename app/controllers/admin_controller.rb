@@ -1,12 +1,12 @@
 class AdminController < ApplicationController
 	before_filter :check_authentication, :except => :login
-	
+
 	in_place_edit_for :section, :name
-	
+
 	def index
-		@sections = Section.find(:all)
+		@sections = Section.all
 	end
-	
+
 	def login
 		if request.post?
 			begin
@@ -29,19 +29,19 @@ class AdminController < ApplicationController
 		session[:last_action_time] = nil
 		redirect_to :controller => 'sections', :action => 'index'
 	end
-	
+
 	def manage_sections
-		@sections = Section.find(:all, :order => :position)
+		@sections = Section.all(:order => :position)
 	end
-	
+
 	def manage_categories
-		@sections = Section.find(:all, :order => :position)
+		@sections = Section.all(:order => :position)
 	end
-	
+
 	def manage_pages
-		@category = Section.find(:first).categories.first
+		@category = Section.first.categories.first
 	end
-	
+
 	def get_pages_in_category
 		category = Category.find(params[:id])
 		render :update do |page|
@@ -49,15 +49,15 @@ class AdminController < ApplicationController
 			page.visual_effect :highlight, "pages_list"
 		end
 	end
-	
+
 	def manage_testimonials
-		@testimonials = Testimonial.find(:all)
+		@testimonials = Testimonial.all
 	end
-	
+
 	def gen_link
-		@pages = Category.find(:first).pages
+		@pages = Category.first.pages
 	end
-	
+
 	def gen_pages_in_category
 		category = Category.find(params[:id])
 		render :update do |page|
@@ -67,7 +67,7 @@ class AdminController < ApplicationController
 			page.visual_effect :highlight, "pages"
 		end
 	end
-	
+
 	def gen_link_for_page
 		link_to_page = Page.find(params[:id])
 		render :update do |page|
@@ -76,14 +76,14 @@ class AdminController < ApplicationController
 			page.visual_effect :highlight, "generated_link"
 		end
 	end
-	
+
 	def view_images
 		require 'rubygems'
 		require 'alib'
-		
+
 		img_dir = "public/images"
 		img_types = ["jpg", "jpeg", "png", "gif"]
-		
+
 		@images = Array.new
 		alib.util.find(img_dir, :follow => true) do |path|
 			if FileTest.file? path
@@ -99,15 +99,15 @@ class AdminController < ApplicationController
 			a[0].downcase <=> b[0].downcase
 		end
 	end
-	
+
 	def upload_image
 		f = File.new("public/images/#{params[:image].original_filename}", "wb")
 		f.write params[:image].read
 		f.close
 		redirect_to :action => 'view_images'
 	end
-	
+
 	def manage_news_items
-		@news_items = NewsItem.find(:all)
+		@news_items = NewsItem.all
 	end
 end
