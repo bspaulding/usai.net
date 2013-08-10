@@ -521,6 +521,7 @@ h1 {
 	font-size: .7em;
 	font-family: "Times New Roman";
 	width: 100%;
+  margin-bottom: 20px;
 }
 
 #footer A:link, A:visited {
@@ -542,9 +543,9 @@ h1 {
 #subNav h1.flat {
   margin: 0px;
 	padding: 0px;
-	
+
 	display: inline;
-	
+
 	color: #666666;
 	font-size: .8em;
 	font-family: "Times New Roman";
@@ -785,7 +786,7 @@ h1 {
 #customer_quotes_block {
 	margin: 10px 0px 0px 0px;
   padding: 10px;
-  
+
 	display: block;
 	width: 778px;
 	height: auto;
@@ -798,7 +799,7 @@ h1 {
 #customer_quotes_block p {
   margin: 0px;
   padding: 0px;
-  
+
 	line-height: 150%;
 	font-size: .8em;
 	font-family: "Times New Roman";
