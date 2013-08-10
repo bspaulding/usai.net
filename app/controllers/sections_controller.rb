@@ -1,8 +1,8 @@
 class SectionsController < ApplicationController
 	before_filter :check_authentication, :except => ['index', 'show']
-	
+
 	in_place_edit_for :section, :name
-	
+
 	uses_tiny_mce(	:options => {
 						:theme => 'advanced',
 						:mode => 'exact',
@@ -20,10 +20,10 @@ class SectionsController < ApplicationController
 						:extended_valid_elements => "form[*],input[*],option[*],select[*],script[*],embed[*],object[*]",
 						:cleanup => false},
 					:only => [:new, :edit])
-	
+
 	def index
 		flash[:tickers] = true
-		@sections = Section.find(:all)
+		@sections = Section.all
 		@serviceCategories = @sections.first.categories[0..3]
 	end
 
@@ -39,7 +39,7 @@ class SectionsController < ApplicationController
 			flash[:notice] = "No section with id '<em>#{params[:id]}</em>'."
 			redirect_to :action => 'index'
 		end
-		
+
 		#if @section.categories.size > 0
 		#	redirect_to @section.categories.first
 		#end
@@ -74,19 +74,19 @@ class SectionsController < ApplicationController
 		if @section.update_attributes(params[:section])
 			flash[:notice] = "Successfully Updated Section."
 			redirect_to :controller => 'admin'
-		else 
+		else
 			render :action => 'edit'
 		end
 	end
-	
+
 	def sort
-		@sections = Section.find(:all)
+		@sections = Section.all
 		for section in @sections
 			section.position = params['sections_list'].index(section.id.to_s) + 1
 			section.save
 		end
 	end
-	
+
 	def destroy
 		# Section.delete(params[:id])
 		flash[:notice] = "You are not allowed to remove Sections, only to change their names."
