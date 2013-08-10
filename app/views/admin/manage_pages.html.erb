@@ -4,7 +4,7 @@
 <h1>Manage Pages</h1>
 <div id="spinner" style="float: right; display: none;"><img src="/images/spinner.gif"></div>
 <b>Category:</b> <select name="category_id" id="category_id">
-		    		<%= option_groups_from_collection_for_select(Section.find(:all), :categories, :name, :id, :name) %>
+		    		<%= option_groups_from_collection_for_select(Section.all, :categories, :name, :id, :name) %>
 		  		 </select>
 
 <%= observe_field	:category_id,
