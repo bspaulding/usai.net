@@ -19,23 +19,23 @@ class PagesController < ApplicationController
 						:invalid_elements => "",
 						:cleanup => false},
 					:only => [:new, :edit])
-	
+
 	def index
 		if params[:category_id]
-			@pages = Page.find(:all, :conditions => ['category_id = ?', params[:category_id]])
+			@pages = Page.all(:conditions => ['category_id = ?', params[:category_id]])
 		else
-			@pages = Page.find(:all)
+			@pages = Page.all
 		end
 	end
 
 	def show
 		begin
 		  if params[:page_name]
-  		  @page = Page.find_by_name(params[:page_name].humanize)	
+  		  @page = Page.find_by_name(params[:page_name].humanize)
   		else
   			@page = Page.find(params[:id])
   		end
-  		
+
 			if !@page.published
 				if session[:user]
 					flash[:notice] = "This page is unpublished."
@@ -51,8 +51,8 @@ class PagesController < ApplicationController
 	end
 
 	def new
-		@sections = Section.find(:all)
-		@categories = Category.find(:all)
+		@sections = Section.all
+		@categories = Category.all
 		@page = session[:page_draft] || Page.new
 	end
 
@@ -66,10 +66,10 @@ class PagesController < ApplicationController
 			render :action => 'new'
 		end
 	end
-	
+
 	def edit
-		@sections = Section.find(:all)
-		@categories = Category.find(:all)
+		@sections = Section.all
+		@categories = Category.all
 		begin
 			@page = Page.find(params[:id])
 		rescue ActiveRecord::RecordNotFound
@@ -78,17 +78,17 @@ class PagesController < ApplicationController
 			redirect_to :action => :index
 		end
 	end
-	
+
 	def update
 		@page = Page.find(params[:id])
 		if @page.update_attributes(params[:page])
 			flash[:notice] = "Successfully Updated Page."
 			redirect_to @page
-		else 
+		else
 			render :action => 'edit'
 		end
 	end
-	
+
 	def sort
 		@pages = Category.find(params[:id]).pages
 		@pages.each_with_index do |page, index|
@@ -100,11 +100,11 @@ class PagesController < ApplicationController
 			page.visual_effect :highlight, "pages_list"
 		end
 	end
-	
+
 	def save_draft
 		session[:page_draft] = Page.new(params[:page])
 	end
-	
+
 	def destroy
 		begin
 			Page.destroy(params[:id])
