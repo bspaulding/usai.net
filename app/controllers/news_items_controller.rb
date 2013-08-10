@@ -16,14 +16,14 @@ class NewsItemsController < ApplicationController
 						:plugins => %w{contextmenu paste},
 						:extended_valid_elements => "form[*],input[*],option[*],select[*],script[*],object[*],embed[*]"},
 					:only => [:new, :edit])
-	
+
 	def index
-		@news_items = NewsItem.find(:all, :conditions => ["published = ?", 1], :order => "created_at DESC", :limit => 10)
+		@news_items = NewsItem.all(:conditions => ["published = ?", 1], :order => "created_at DESC", :limit => 10)
 		if params[:format] == 'rss'
 			render :layout => false
 		end
 	end
-	
+
 	def show
 		begin
 			@news_item = NewsItem.find(params[:id])
@@ -37,13 +37,13 @@ class NewsItemsController < ApplicationController
 			else
 				redirect_to :action => 'index'
 			end
-		end	
+		end
 	end
-	
+
 	def new
 		@news_item = NewsItem.new
 	end
-	
+
 	def create
 		@news_item = NewsItem.new(params[:news_item])
 		if @news_item.save
@@ -54,7 +54,7 @@ class NewsItemsController < ApplicationController
 			redirect_to :action => 'new'
 		end
 	end
-	
+
 	def edit
 		begin
 			@news_item = NewsItem.find(params[:id])
@@ -62,7 +62,7 @@ class NewsItemsController < ApplicationController
 			redirect_to :action => 'new'
 		end
 	end
-	
+
 	def update
 		@news_item = NewsItem.find(params[:id])
 		if @news_item.update_attributes(params[:news_item])
@@ -72,7 +72,7 @@ class NewsItemsController < ApplicationController
 		end
 		redirect_to @news_item
 	end
-	
+
 	def destroy
 		begin
 			NewsItem.destroy(params[:id])
