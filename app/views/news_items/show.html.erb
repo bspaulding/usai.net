@@ -1,0 +1,7 @@
+<% if session[:user] %>
+<%= render :partial => 'admin/admin_float', :object => @news_item %>
+<% end %>
+
+<h1><%= @news_item.title %></h1>
+<div class="date" align="right"><%= @news_item.created_at.to_s(:date_named_month) %></div>
+<%= @news_item.article %>

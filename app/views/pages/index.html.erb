@@ -1,0 +1,6 @@
+<h1>Pages</h1>
+<ul>
+<% for page in @pages %>
+	<li>[<%= page.category.section.name %> > <%= page.category.name %>] <%= link_to page.name, page %></li>
+<% end %>
+</ul>

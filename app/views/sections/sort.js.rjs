@@ -1,0 +1,1 @@
+page.replace_html 'nav_global', :partial => 'layouts/global_nav'

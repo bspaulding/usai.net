@@ -1,0 +1,12 @@
+<div id="customer_quotes_block">
+	<table cellspacing="10px">
+		<tr>
+			<td>
+				<img src="<%= @testimonial.imageURL %>">
+			</td><td>
+				<p><em>"<%= @testimonial.quote %>"</em><br>
+				<%= "- #{@testimonial.author}" if author.length > 0 %></p>
+			</td>
+		</tr>
+	</table>
+</div>

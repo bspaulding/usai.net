@@ -1,0 +1,4 @@
+AuthName "Dave's Files"
+AuthType Basic
+AuthUserFile /home-svr3/usai/html/usai.net/public/.htpasswd
+Require valid-user

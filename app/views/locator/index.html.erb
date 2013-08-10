@@ -1,0 +1,17 @@
+<h1>Access Number Locator</h1>
+<p>Please enter the phone number you will be dialing from in the form below and press 'Lookup' to find your local access numbers.</p>
+<% form_tag 'locator' do -%>
+<div align="center" style="margin-bottom: 20px;">
+<b>Phone Number:</b>
+ (<%= text_field_tag 'npa', params[:npa], :size => 4, :maxlength => 3 %>)
+ <%= text_field_tag 'nxx', params[:nxx], :size => 4, :maxlength => 3 %>
+ <%= text_field_tag 'extension', params[:extension], :size => 5, :maxlength => 4 %>
+ <%= submit_tag "Lookup" %>
+</div>
+<% end -%>
+
+<div id="results">
+<% if params[:npa] && params[:nxx] -%>
+<script type="text/javascript" src="http://locator.1dial.com/locator.asp?fface=Times%20New%20Roman&tc=FFFFFF&search=phone&npa=<%= params[:npa] %>&nxx=<%= params[:nxx] %>"></script>
+<% end -%>
+</div>

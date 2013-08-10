@@ -1,0 +1,32 @@
+<%= render :partial => "admin/admin_nav" %>
+
+<div id="subMain">
+<h1>Edit a Category</h1>
+<% form_for @category do |f| %>
+<table>
+	<tr>
+		<th align="right">Section:</th>
+		<td><%= f.collection_select :section_id, @sections, :id, :name %></td>
+	</tr><tr>
+		<th align="right">Name:</th>
+		<td><%= f.text_field :name %></td>
+	</tr><tr>
+		<th valign="top">Description:</th>
+		<td><%= f.text_area :description, :cols => 75, :rows => 5 %></td>
+	</tr><tr>
+		<td colspan=2 align="right">
+			<%= link_to "Generate a Link",
+						"javascript:void(0)",
+						{:onclick => visual_effect(:toggle_appear, "modal_float")} %>
+		</td>
+	</tr><tr>
+		<th valign="top" align="right">Body:</th>
+		<td><font size=1><em>This is the main web page for this category.</em></font><%= f.text_area :body, :cols => 75, :rows => 15 %></td>
+	</tr><tr>
+		<td colspan=2 align="right"><%= submit_tag "Update Category" %></td>
+	</tr>
+</table>
+<% end %>
+</div>
+
+<%= render :partial => 'admin/link_generator' %>

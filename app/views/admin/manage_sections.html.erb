@@ -1,0 +1,17 @@
+<%= render :partial => "admin_nav" %>
+
+<div id="subMain">
+<h1>Manage Sections</h1>
+<p>Drag and drop each of the section names below to re-order them.</p>
+<ol id="sections_list">
+<% for section in @sections %>
+<li id="section_<%= section.id %>">
+	<%= section.name %> <%= link_to "[Edit]", {:controller => 'sections', :action => 'edit', :id => section.id} %>
+</li>
+<% end %>
+</ol>
+
+<%= sortable_element 'sections_list',
+	:url => {:controller => 'sections', :action => 'sort'},
+	:complete => visual_effect(:highlight, 'sections_list') %>
+</div>

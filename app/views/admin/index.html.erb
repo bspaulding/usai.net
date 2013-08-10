@@ -1,0 +1,7 @@
+<%= render :partial => "admin_nav" %>
+
+<div id="subMain">
+<h1>Administrative Console</h1>
+Welcome, <%= session[:username] %>, you have logged in. (<%= link_to "Logout", :action => 'logout' %>)<br/>
+Choose an action on the left to administer this website.
+</div>

@@ -1,0 +1,11 @@
+<% list_pages_in_category.pages.each_with_index do |page, index| %>
+	<% if !page.visible %>
+		<li class="invisible" id="item_<%= index %>"><%= page.name %> [<%= link_to "Edit", {:controller => 'pages', :action => 'edit', :id => page.id} %> | <%= link_to "Delete", url_for(:controller => "pages", :action => "destroy", :id => page.id), :confirm => "Are you sure you want to delete page: '#{page.name}'?\n\nThis operation CAN NOT be undone!", :method => 'delete' %>]</li>
+	<% else %>
+		<li class="visible" id="item_<%= index %>"><%= page.name %> [<%= link_to "Edit", {:controller => 'pages', :action => 'edit', :id => page.id} %> | <%= link_to "Delete", url_for(:controller => "pages", :action => "destroy", :id => page.id), :confirm => "Are you sure you want to delete page: '#{page.name}'?\n\nThis operation CAN NOT be undone!", :method => 'delete' %>]</li>
+	<% end %>
+<% end %>
+<%= sortable_element	'pages_list',
+						:url => {:controller => 'pages', :action => 'sort', :id => list_pages_in_category.id},
+						:before => "Element.show('spinner')",
+						:complete => "Element.hide('spinner')" %>

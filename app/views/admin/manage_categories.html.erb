@@ -1,0 +1,25 @@
+<%= render :partial => 'admin/admin_nav' %>
+
+<div id="subMain">
+<h1>Manage Categories</h1>
+<div id="spinner" style="float:right;display:none;"><img src="/images/spinner.gif"></div>
+<p>Instructions: Drag and drop the categories to reorder them.</p>
+<ul id="sections_list">
+<% for section in @sections -%>
+	<li>
+		<b><%= section.name %> <%= link_to "[Edit]", {:controller => 'sections', :action => 'edit', :id => section.id} %></b>
+		<ol id="section_<%= section.id %>_category_list">
+		<% for category in section.categories -%>
+			<li id="section_<%= section.id %>_category_<%= category.id %>">
+				<%= category.name %> <%= link_to "[Edit]", {:controller => 'categories', :action => 'edit', :id => category.id} %>
+			</li>
+		<% end -%>	
+		</ol>
+	</li>
+	<%= sortable_element "section_#{section.id}_category_list",
+			:url => {:controller => 'categories', :action => 'sort', :id => section.id},
+			:before => "Element.show('spinner')",
+			:complete => "Element.hide('spinner')" %>
+<% end -%>	
+</ul>
+</div>

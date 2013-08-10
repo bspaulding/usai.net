@@ -1,0 +1,36 @@
+<% @pages = Category.find(:first).pages %>
+
+<div id="modal_float" style="display:none;">
+
+<div id="close_tag" style="float:right;">
+	<%= link_to "Close [X]", "javascript:void(0)", {:onclick => visual_effect(:toggle_appear, "modal_float")} %>
+</div>
+
+<h1>Link Generator</h1>
+<div id="spinner" style="float:right;display:none;"><img src="/images/spinner.gif"></div>
+<b>Category:</b> <select name="category_id" id="category_id">
+		    		<%= option_groups_from_collection_for_select(Section.find(:all), :categories, :name, :id, :name) %>
+		  		 </select>
+
+<%= observe_field	:category_id,
+					:before => "Element.show('spinner')",
+					:complete => "Element.hide('spinner')",
+					:url => {:controller => 'admin', :action => 'gen_pages_in_category'},
+					:with => "'id=' + encodeURIComponent(value)" %>
+
+<b>Page:</b> <select name="pages" id="pages">
+		<% @pages.each do |page| -%>
+			<option value="<%= page.id %>"><%= page.name %></option>
+		<% end -%>
+	  </select>
+
+<%= observe_field	:pages,
+					:before => "Element.show('spinner')",
+					:complete => "Element.hide('spinner')",
+					:url => {:controller => 'admin', :action => 'gen_link_for_page'},
+					:with => "'id=' + encodeURIComponent(value)" %>
+					
+	<div id="generated_link">
+		<%= h("<a href=\"#{url_for @pages.first}\">#{@pages.first.name}</a>") if @pages.count > 0 %>
+	</div>
+</div>

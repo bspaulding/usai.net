@@ -1,0 +1,13 @@
+<%= render :partial => 'shared/nav_categories', :object => Section.first.categories %>
+
+<div id="subMain">
+<div id="rss_subscribe_link">
+<%= link_to "RSS Feed<img style=\"border:0px;margin:0px 0px 0px 10px;padding:0px;\" src=\"#{image_path('feed-icon-14x14.png')}\">", formatted_news_items_url(:rss) %>
+</div>
+<h1>News</h1>
+<% @news_items.each_with_index do |news_item, index| -%>
+<p>
+  <%= news_item.article %>
+</p>
+<% end -%>
+</div>

@@ -1,0 +1,3 @@
+time = Time.now.strftime("%I:%M %p")
+page.replace_html 'draft_message', "Draft saved at #{time}"
+page.visual_effect :highlight, 'draft_message'

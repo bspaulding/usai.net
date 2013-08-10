@@ -1,0 +1,38 @@
+<%= render :partial => "admin/admin_nav" %>
+
+<% save_freq = 30 %>
+
+<div id="subMain">
+<h1>Create a New Category</h1>
+<div id="draft_message">Changes made on this form will be saved as a draft every <%= save_freq %> seconds.</div>
+<% form_for @category do |f| %>
+<table>
+	<tr>
+		<th align="right">Section:</th>
+		<td><%= f.collection_select :section_id, @sections, :id, :name %></td>
+	</tr><tr>
+		<th align="right">Name:</th>
+		<td><%= f.text_field :name %></td>
+	</tr><tr>
+		<th valign="top">Description:</th>
+		<td><%= f.text_area :description, :cols => 75, :rows => 5 %></td>
+	</tr><tr>
+		<td colspan=2 align="right">
+			<%= link_to "Generate a Link",
+						"javascript:void(0)",
+						{:onclick => visual_effect(:toggle_appear, "modal_float")} %>
+		</td>
+	</tr><tr>
+		<th valign="top" align="right">Body:</th>
+		<td><font size=1><em>This is the main web page for this category.</em></font><%= f.text_area :body, :cols => 75, :rows => 15 %></td>
+	</tr><tr>
+		<td colspan=2 align="right"><%= submit_tag "Create Category" %></td>
+	</tr>
+</table>
+<% end %>
+<%= observe_form 'new_category',
+	:url => {:controller => 'categories', :action => 'save_draft'},
+	:frequency => save_freq %>
+</div>
+
+<%= render :partial => 'admin/link_generator' %>

@@ -1,0 +1,40 @@
+<%= render :partial => 'admin/admin_nav' %>
+
+<div id="subMain">
+<h1>Edit a Section</h1>
+<div id="spinner" style="float:right;display:none;"><img src="/images/spinner.gif"></div>
+<p>Instructions: <em>Click on the section name to change its name, drag and drop the categories to re-order them.</em></p>
+
+<b><label for="name">Name:</label></b> 
+<span id="edit_section_name"><%= @section.name %></span>
+<%= in_place_editor "edit_section_name",
+	{:url => url_for(	:action => "set_section_name",
+						:id => @section.id,
+						:authenticity_token => @auth_token)} %><br/>
+
+<b>Categories:</b><br/>
+<ol id="section_<%= @section.id %>_category_list">
+	<% for category in @section.categories %>
+	<li id="category_<%= category.id %>"><%= category.name %> <%= link_to "[Edit]", {:controller => 'categories', :action => 'edit', :id => category.id} %></l1>
+	<% end %>
+</ol>
+
+<%= sortable_element "section_#{@section.id}_category_list",
+	:url => {:controller => 'categories', :action => 'sort', :id => @section.id},
+	:before => "Element.show('spinner')",
+	:complete => "Element.hide('spinner')" %>
+
+<% form_for @section do |f| %>
+<table>
+  <tr>
+		<th valign="top" align="right">Body:</th>
+		<td><font size=1><em>This is the main web page for this section.</em></font><%= f.text_area :body, :cols => 75, :rows => 15 %></td>
+	</tr><tr>
+	 <td colspan="2" align="center">
+	   <%= f.submit "Update Body" %>
+	 </td>
+	</tr>
+</table>
+<% end %>
+
+</div>

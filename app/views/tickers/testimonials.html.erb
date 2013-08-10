@@ -1,0 +1,66 @@
+var testimonials = new Array(<%= @testimonials.size %>);
+<% @testimonials.each_with_index do |testimonial, index| -%>
+	testimonials[<%= index %>] = new Array();
+	testimonials[<%= index %>].imghref = "<%= testimonial.imageURL %>";
+	<% if testimonial.author.blank? %>
+	testimonials[<%= index %>].quote = "<%= "<em>&quot;#{h(testimonial.quote)}&quot;</em>" %>" ;
+	<% else %>
+	testimonials[<%= index %>].quote = "<%= "<em>&quot;#{h(testimonial.quote)}&quot;</em><br/>- #{h(testimonial.author)}" %>";
+	<% end %>
+<% end -%>
+var testimony_currentItemIndex = 0;
+var testimony_cycleStartCount = 20000;
+var testimony_cycleCount = testimony_cycleStartCount;
+var testimony_timeOut = null;
+
+function displayItem_Testimony(index) {
+	if(testimony_currentItemIndex % 2 > 0) {
+		document.getElementById("customer_quotes_block").innerHTML = "<img src=\"" + testimonials[index].imghref + "\" class=\"float_right\"><p class=\"float_left\">" + testimonials[index].quote + "</p>";
+	} else {
+		document.getElementById("customer_quotes_block").innerHTML = "<img src=\"" + testimonials[index].imghref + "\" class=\"float_left\"><p class=\"float_right\">" + testimonials[index].quote + "</p>";
+	}
+	//document.getElementById("customer_quotes_inside").style.opacity = 0.999;
+}
+
+function displayNextItem_Testimony() {
+	displayItem_Testimony(testimony_currentItemIndex);
+	testimony_currentItemIndex += 1;
+	if(testimony_currentItemIndex >= testimonials.length) {
+		testimony_currentItemIndex = 0;
+	}
+}
+
+function cycleTicker_Testimony() {
+	if(testimony_timeOut) {clearTimeout(testimony_timeOut);}
+	if(testimony_cycleCount < 0) {
+		testimony_cycleCount = testimony_cycleStartCount;
+		displayNextItem_Testimony();
+	} else {
+		testimony_cycleCount -= 100;
+/*		if(testimony_cycleCount <= 1000) {
+			oldOpacity = document.getElementById('customer_quotes_inside').style.opacity;
+			newOpacity = oldOpacity - .09;
+			setElementOpacity(document.getElementById('customer_quotes_inside'), newOpacity);
+		} else if(testimony_cycleCount >= 2500) {
+			oldOpacity = document.getElementById('customer_quotes_inside').style.opacity;
+			newOpacity = oldOpacity + .25;
+			setElementOpacity(document.getElementById('customer_quotes_inside'), newOpacity);
+		}*/
+	} 
+	testimony_timeOut = setTimeout(function() {cycleTicker_Testimony()}, 100);
+}
+
+function pauseTicker_Testimony() {
+	if(testimony_timeOut) {clearTimeout(testimony_timeOut);}
+	setElementOpacity(document.getElementById('customer_quotes_block'), 0.999);
+}
+
+function restartTicker_Testimony() {
+	testimony_cycleCount = testimony_cycleStartCount;
+	cycleTicker_Testimony();
+}
+
+function startTicker_Testimony() {
+	testimony_cycleCount = testimony_cycleStartCount;
+	cycleTicker_Testimony();
+}

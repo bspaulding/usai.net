@@ -1,0 +1,8 @@
+<%= render :partial => 'shared/nav_categories', :object => @category.section.categories %>
+
+<div id="subMain">
+<% if session[:user] %>
+<%= render :partial => 'admin/admin_float', :object => @category %>
+<% end %>
+<%= @category.body %>
+</div>

@@ -1,0 +1,23 @@
+<%= render :partial => "admin_nav" %>
+
+<div id="subMain">
+<h1>Manage Testimonials</h1>
+<p>Drag and drop each of the testimonials below to re-order them.</p>
+<div id="testimonials_list">
+<% @testimonials.each_with_index do |testimonial, index| %>
+<div id="testimonial_<%= testimonial.id %>" class="sortable">
+<% if index.odd? %>
+<%= render :partial => 'testimonials/testimonial_img_left', :object => testimonial %>
+<% else %>
+<%= render :partial => 'testimonials/testimonial_img_right', :object => testimonial %>
+<% end %>
+</div>
+<% end %>
+</div>
+
+<%= sortable_element 'testimonials_list',
+	:tag => 'div',
+	:only => 'sortable',
+	:url => {:controller => 'testimonials', :action => 'sort'},
+	:complete => visual_effect(:highlight, 'testimonials_list') %>
+</div>

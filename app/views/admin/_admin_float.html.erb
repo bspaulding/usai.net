@@ -1,0 +1,9 @@
+<div id="admin_float">
+<h1>Administration</h1>
+<em><%= session[:username] %></em><br/>
+<%= link_to "Go to Console", {:controller => 'admin', :action => 'index'} %><br/>
+<% unless admin_float.nil? || admin_float.id.nil? %>
+<%= link_to "Edit this Page", {:action => 'edit', :id => admin_float.id} %><br/>
+<% end %>
+<%= link_to "Logout", {:controller => 'admin', :action => 'logout'} %>
+</div>

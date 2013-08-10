@@ -1,0 +1,8 @@
+<%= render :partial => 'admin/admin_nav' %>
+
+<div id="subMain">
+<h1>Create a Section</h1>
+<% form_for Section.new do |f| %>
+	Name: <%= f.text_field :name %>	<%= submit_tag "Create Section" %>
+<% end %>
+</div>

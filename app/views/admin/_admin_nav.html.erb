@@ -1,0 +1,36 @@
+<div id="subNav">
+
+<h1>Sections</h1>
+<ul>
+	<li><%= link_to "Manage Sections", {:controller => 'admin', :action => 'manage_sections'} %></li>
+</ul>
+
+<h1>Categories</h1>
+<ul>
+	<li><%= link_to "Manage Categories", {:controller => 'admin', :action => 'manage_categories'} %></li>
+	<li><%= link_to "New Category", {:controller => 'categories', :action => 'new'} %></li>
+</ul>
+
+<h1>Pages</h1>
+<ul>
+	<li><%= link_to "Manage Pages", {:controller => 'admin', :action => 'manage_pages'} %></li>
+	<li><%= link_to "New Page", {:controller => 'pages', :action => 'new'} %></li>
+</ul>
+
+<h1>News</h1>
+<ul>
+	<li><%= link_to "Manage Articles", {:controller => 'admin', :action => 'manage_news_items'} %></li>
+	<li><%= link_to "New Article", {:controller => 'news_items', :action => 'new'} %></li>
+</ul>
+
+<h1>Testimonials</h1>
+<ul>
+	<li><%= link_to "New Testimonial", {:controller => 'testimonials', :action => 'new'} %></li>
+</ul>
+
+<h1>Multimedia</h1>
+<ul>
+	<li><%= link_to "Manage Images", {:controller => 'admin', :action => 'view_images'} %></li>
+</ul>
+
+</div>

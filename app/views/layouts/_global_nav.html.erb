@@ -1,0 +1,9 @@
+<ul>
+	<% Section.find(:all, :order => :position).each do |section| %>
+	  <% if section.name == "Support Center" %>
+	  <li><%= link_to section.name, "http://support.usai.net" %></li>
+	  <% else %>
+		<li><%= link_to section.name, section_by_name_url(:section_name => section.name.downcase.gsub(' ', '_')) %></li>
+    <% end %>
+	<% end %>
+</ul>

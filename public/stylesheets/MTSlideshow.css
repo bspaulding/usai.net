@@ -1,0 +1,32 @@
+#slideshow_outer_container {
+	margin: 0px;
+    padding: 0px;
+    
+    width: 800px;
+	height: 200px;
+		
+	position: relative;
+	float: left;
+}
+
+#feature {
+    margin: 0px;
+    padding: 0px;
+    
+	width: 800px;
+	height: 200px;
+	
+	position: relative;
+	float: left;
+}
+
+#feature .photo {
+    margin: 0px;
+    padding: 0px;
+    
+	position: absolute;
+	top: 0px;
+	left: 0px;
+
+	border: 1px solid black;
+}

@@ -1,0 +1,7 @@
+<% @testimonials.each_with_index do |testimonial, index| %>
+<% if index.odd? %>
+<%= render :partial => 'testimonial_img_left', :object => testimonial %>
+<% else %>
+<%= render :partial => 'testimonial_img_right', :object => testimonial %>
+<% end %>
+<% end %>

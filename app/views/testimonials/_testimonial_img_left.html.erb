@@ -1,0 +1,16 @@
+<div id="customer_quotes_block"
+  <% unless testimonial_img_left.link.blank? %>
+  onclick="window.location='<%= testimonial_img_left.link %>'"
+  <% end %>
+>
+	<table cellspacing="10px">
+		<tr>
+			<td>
+				<img src="<%= testimonial_img_left.imageURL %>">
+			</td><td>
+				<p><em>"<%= testimonial_img_left.quote %>"</em><br>
+		    <%= "- #{testimonial_img_left.author}" unless testimonial_img_left.author.blank? %></p>
+			</td>
+		</tr>
+	</table>
+</div>

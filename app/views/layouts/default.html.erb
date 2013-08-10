@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>USAi.net</title>
+<link rel="shortcut icon" href="/images/favicon.ico" />
+<%= stylesheet_link_tag "master", :media => :all %>
+<!--[if IE]>
+<style type="text/css">
+#nav_global ul li A:hover {
+	height: 100%;
+}
+</style>
+<![endif]-->
+<%= auto_discovery_link_tag :rss, formatted_news_items_url(:rss) %>
+
+<% # Include TinyMCE before other JS to avoid problems -%>
+<%= include_tiny_mce_if_needed %>
+
+<%= javascript_include_tag :defaults %>
+<%= javascript_include_tag "jquery.js", "search_field.js" %>
+<% if flash[:tickers] -%>
+<script type="text/javascript" src="/tickers/news"></script>
+<script type="text/javascript" src="/tickers/testimonials"></script>
+<% end -%>
+
+<% # Include the DSL value.net JavaScript here if that's the current page, since TinyMCE won't allow the script tag -%>
+<% if @page && @page.name == "DSL" %>
+<script src='http://orders.value.net/Methods.js' language='javascript'></script>
+<% end %>
+
+<%= yield :head %>
+
+<meta name="google-site-verification" content="d90jOrhHiJFaNbCEaxoj0ORVRfh7J1nxx2-kDkR_v_4" />
+</head>
+
+<body>
+<div id="wrap">
+	<div id="header">
+		<% form_tag :controller => 'search' do -%>
+			<input name="query" id="siteSearch" type="search" size="20" placeholder="Search USAi.net" autosave="net.usai.search_history" results="5" class="siteSearch_safari"/>
+		<% end -%>
+		<%= link_to image_tag("/images/logo.png", :id => "logo", :border => 0), '/' %>
+	</div>
+	
+	<div id="nav_global">
+		<%= render :partial => 'layouts/global_nav' %>
+	</div>
+	
+	<div id="main">
+		<% if flash[:notice] -%>
+			<div id="notice">
+				<%= flash[:notice] %>
+			</div>
+		<% end -%>
+		<%= yield :layout %>
+	</div>
+</div>
+
+<div id="footer">
+	USAi.net | 
+	<script language="JavaScript" type="text/javascript">
+	<!--
+		document.write("<a href=\"mailto:info");
+		document.write("@usai.net\">info");
+		document.write("@usai.net</a> ");
+	-->
+	</script>
+	| 1-877-USE-USAi | <a href="/legal.html">Legal Notice</a><br/>
+	<%= link_to( image_tag("switchwire_telco_partner.jpg", :border => 0), "http://www.switchwire.net/" ) %><br/><br/>
+</div>
+<div style="display:none;"><a href="mailto:honeyp@usai.net">Spam Me.</a></div>
+</body>
+</html>

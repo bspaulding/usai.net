@@ -1,0 +1,44 @@
+<%= render :partial => "admin/admin_nav" %>
+
+<% save_freq = 30 %>
+
+<div id="subMain">
+<h1>Create a New Page</h1>
+<div id="draft_message">Changes made on this form will be saved as a draft every <%= save_freq %> seconds.</div>
+<% form_for @page do |f| %>
+<table>
+	<tr>
+		<th>Name:</th>
+		<td><%= f.text_field :name %></td>
+	</tr><tr>
+		<th>Category:</th>
+		<td><select name="page[category_id]" id="page_category_id">
+				<%= option_groups_from_collection_for_select(@sections, :categories, :name, :id, :name, @category_id) %>
+			</select>
+		</td>
+	</tr><tr>
+		<td align="right"><%= f.check_box :visible, {:checked => true} %></td>
+		<td>Show in navigation.</td>
+	</tr><tr>
+		<td align="right"><%= f.check_box :published %></td>
+		<td>Published. <em>(Unpublished pages are not viewable by the end user)</em></td>
+	</tr><tr>
+		<td colspan=2 align="right">
+			<%= link_to "Generate a Link",
+						"javascript:void(0)",
+						{:onclick => visual_effect(:toggle_appear, "modal_float")} %>
+		</td>
+	</tr><tr>
+		<th valign="top">Body:</th>
+		<td><%= f.text_area :body, :cols => 100 %></td>
+	</tr><tr>
+		<td colspan=2 align="right"><%= submit_tag "Create Page" %></td>
+	</tr>
+</table>
+<% end %>
+<%#= observe_form 'new_page',
+	:url => {:controller => 'pages', :action => 'save_draft'},
+	:frequency => save_freq %>
+</div>
+
+<%= render :partial => 'admin/link_generator' %>

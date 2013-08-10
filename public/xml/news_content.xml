@@ -1,0 +1,24 @@
+<NewsItems>
+	<NewsItem id="0">
+		<title>USAi.net President Receives Boston WiFi Award</title>
+		<article><![CDATA[
+			<p>On May 30, 2007, USAi.net president David Spaulding received a 2006 Special Appreciation Award from the Boston Main Streets.</p><img class=\"floatLeft\" src=\"images/news/0/bostonWiFiaward.jpg\"><p><em>&quot;David Spaulding, the president of USAi.net, has been partnering closely with Boston Main Streets to bring free wireless to our commercial communities in Roslindale, Washington Gateway, and Jamaica Plain. In addition to extending coverage within these districts, he is also working on providing coverage to Hyde Park, West Roxbury and Chinatown. Dave Spaulding has demonstrated a commitment of both time and resources to improving Boston's neighborhoods, and has demonstrated how effective partnerships can be in impacting our communities.\"</em><br><div align=\"right\">- Name to Be Determined, Boston, MA.</div></p>
+		]]></article>
+		<date>
+			<month>8</month>
+			<day>13</day>
+			<year>2007</year>
+		</date>
+	</NewsItem>
+	<NewsItem id="1">
+		<title>USAi Gets Airplay on UPN38 News</title>
+		<article><![CDATA[
+			<p>On February 12, 2007, USAi.net president David Spaulding is seen in a news short called Digital Living, which talked about the Boston Main Streets WiFi project.</p><div align=\"center\"><OBJECT CLASSID=\"clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B\" CODEBASE=\"http://www.apple.com/qtactivex/qtplugin.cab\" WIDTH=\"320\" HEIGHT=\"256\"><PARAM NAME=\"src\" VALUE=\"images/news/1/USAI-ON-CBS_Small.mp4\" /><EMBED SRC=\"images/news/1/USAI-ON-CBS_Small.mp4\" WIDTH=\"320\" HEIGHT=\"256\" PLUGINSPAGE=\"www.apple.com/quicktime/download\" autostart=\"true\" controller=\"true\"/></OBJECT></div>
+		]]></article>
+		<date>
+			<month>8</month>
+			<day>13</day>
+			<year>2007</year>
+		</date>
+	</NewsItem>
+</NewsItems>

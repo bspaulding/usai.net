@@ -1,0 +1,59 @@
+var newsItems = new Array(<%= @news_items.size() %>);
+<% @news_items.each_with_index do |news_item, index| -%>
+newsItems[<%= index %>] = '<%= link_to news_item.title, '/news' %>';
+<% end -%>
+var currentItemIndex = 0;
+var cycleStartCount = 5000;
+var cycleCount = cycleStartCount;
+var timeOut = null;
+
+function addEventToObject(obj,evt,func) {
+	var oldhandler = obj[evt];
+	obj[evt] = (typeof obj[evt] != 'function') ? func : function(ev){oldhandler(ev);func(ev);};
+}
+
+function displayItem(index) {
+	document.getElementById("ticker-item").innerHTML = newsItems[index];
+}
+
+function displayNextItem() {
+	displayItem(currentItemIndex);
+	currentItemIndex += 1;
+	if(currentItemIndex >= newsItems.length) {
+		currentItemIndex = 0;
+	}
+}
+
+function cycleTicker() {
+	if(timeOut) {clearTimeout(timeOut);}
+	if(cycleCount < 0) {
+		cycleCount = cycleStartCount;
+		displayNextItem();
+	} else {
+		cycleCount -= 100;
+	}
+	timeOut = setTimeout(function() {cycleTicker()}, 100);
+}
+
+function pauseTicker() {
+	if(timeOut) {clearTimeout(timeOut);}
+	setElementOpacity(document.getElementById('ticker-item'), 0.999);
+}
+
+function restartTicker() {
+	cycleCount = cycleStartCount;
+	cycleTicker();
+}
+
+function startTicker() {
+	cycleCount = cycleStartCount;
+	cycleTicker();
+}
+
+function setElementOpacity(element, opacity) {
+	element.style.KHTMLOpacity = opacity; // Safari<1.2, Konqueror
+	element.style.MozOpacity = opacity; // Older Mozilla and Firefox
+	element.style.opacity = opacity; // Safari 1.2, newer Firefox and Mozilla, CSS3
+	//obj.style.zoom = 1; // bizarre ie fix
+	//obj.style.filter = 'alpha(opacity:'+obj.fadeCount+')'; // IE/Win
+}

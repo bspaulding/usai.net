@@ -1,0 +1,40 @@
+<%= render :partial => 'admin/admin_nav' %>
+
+<div id="subMain">
+<h1>Edit a Page</h1>
+<% form_for @page, :onsubmit => 'return submitForm();' do |f| %>
+<table>
+	<tr>
+		<th align="right">Name:</th>
+		<td><%= f.text_field :name %></td>
+	</tr><tr>
+		<th>Category:</th>
+		<td><select name="page[category_id]" id="page_category_id">
+				<%= option_groups_from_collection_for_select(@sections, :categories, :name, :id, :name, @page.category_id) %>
+			</select>
+		</td>
+	</tr><tr>
+		<td align="right"><%= f.check_box :visible %></td>
+		<td>Page is visible in navigation.</td>
+	</tr><tr>
+		<td align="right"><%= f.check_box :published %></td>
+		<td>Published. <em>(Unpublished pages are not viewable by the end user)</em></td>
+	</tr><tr>
+		<td colspan=2 align="right">
+			<%= link_to "Generate a Link",
+						"javascript:void(0)",
+						{:onclick => visual_effect(:toggle_appear, "modal_float")} %>
+		</td>
+	</tr><tr>
+		<th align="right" valign="top">Body:</th>
+		<td>
+			<%= f.text_area :body, :cols => 100 %>
+		</td>
+	</tr><tr>
+		<td colspan=2 align="right"><%= submit_tag "Save Changes" %></td>
+	</tr>
+</table>
+<% end %>
+</div>
+
+<%= render :partial => 'admin/link_generator' %>

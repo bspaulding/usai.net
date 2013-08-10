@@ -1,0 +1,21 @@
+<% nav_categories = Section.first.categories %>
+<div id="subNav">
+<% nav_categories.each do |category| %>
+	<%= link_to "<h1>#{category.name}</h1>", category_by_name_url( :section_name => category.section.name.downcase.gsub(' ', '_'),
+	                                                               :category_name => category.name.downcase.gsub(' ', '_') 
+	                                                             )%>
+	<ul>
+	<% if category.pages.count > 0 %>
+	<% category.pages.each do |page| %>
+		<% if page.visible && page.published %>
+		<li><%= link_to page.name, page_by_name_url(  :section_name => page.section_name.downcase.gsub(' ', '_'),
+		                                              :category_name => page.category.name.downcase.gsub(' ', '_'),
+		                                              :page_name => page.name.downcase.gsub(' ', '_')
+		                                            ) %></li>
+		<% end %>
+	<% end %>
+	<% end %>
+	</ul>
+<% end %>
+<h1 class="flat"><%= link_to "Clients", "/clients" %></h1> | <h1 class="flat"><%= link_to "Partners", "/partners" %></h1> | <h1 class="flat"><%= link_to "News", "/news" %></h1>
+</div>

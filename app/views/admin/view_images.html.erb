@@ -1,0 +1,25 @@
+<%= render :partial => 'admin/admin_nav' %>
+
+<div id="subMain">
+<h1>Images</h1>
+<img src="/images/spinner.gif" style="border:0px none;display:none;float:right;" id="spinner">
+<% form_tag({:action => 'upload_image'}, {:multipart => true}) do %>
+<b>Upload Image:</b> <%= file_field_tag "image" %>
+<%= submit_tag "Upload Image", :onclick => "Element.show('spinner')" %>
+<% end %>
+<hr>
+<table>
+<% @images.each_with_index do |image, index| %>
+	<tr>
+		<th valign="top" align="left"><%= image[0] %></th>
+		<td>
+			<%= h("<img src=\"#{image[1]}\">") %><br/>
+			<%= link_to "Show/Hide", "javascript:void();", {:onclick => visual_effect(:toggle_blind, "image_#{index}")} %><br/>
+			<img src="<%= image[1] %>" id="image_<%= index %>" style="display:none;">
+		</td>
+	</tr>
+<% end %>
+</table>
+
+<iframe id="upload_frame" style="display:none;"></iframe>
+</div>

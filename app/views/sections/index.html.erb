@@ -1,0 +1,57 @@
+<% content_for :head do %>
+<%= stylesheet_link_tag 'MTSlideshow' %>
+<%= javascript_include_tag "jquery", "MTSlideshow" %>
+<script type="text/javascript" language="JavaScript">
+$(document).ready(function() {
+    var slides = [
+        "images/slider/slider.001.jpg",
+        "images/slider/slider.002.jpg",
+        "images/slider/slider.003.jpg"
+    ];
+    var slideshow = new MTSlideshow('feature', slides, 5000);
+    slideshow.preload();
+    slideshow.start();
+});
+</script>
+<% end %>
+
+<% if session[:user] %>
+<%= render :partial => 'admin/admin_float' %>
+<% end %>
+
+<div id="slideshow_outer_container">
+    <div id="feature"></div>
+</div>
+
+<div id="service_blocks">
+	<% for category in @serviceCategories %>
+		<div id="service_block" name="serviceBlock" onmouseover="this.style.backgroundColor = '#F5F5F5'" onmouseout="this.style.backgroundColor=''" onclick="location.href='<%= category_by_name_url( :section_name => category.section.name.downcase.gsub(' ', '_'), :category_name => category.name.downcase.gsub(' ', '_') ) %>'">
+			<h1><%= category.name %></h1>
+			<p><%= category.description %></p>
+		<%= link_to "Read More ->", category_by_name_url( :section_name => category.section.name.downcase.gsub(' ', '_'),
+		                                                  :category_name => category.name.downcase.gsub(' ', '_')
+		                                                ) %>
+		</div>
+	<% end %>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+startTicker();
+</script>
+
+<div id="ticker">
+	<div id="ticker-header">USAi.net News</div>
+	<div id="ticker-item" onmouseover="pauseTicker()" onmouseout="restartTicker()"><%= link_to "USAi.net News & Press Releases", :controller => 'news_items', :action => 'index' %></div>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+startTicker_Testimony();
+</script>
+
+<div id="customer_quotes_block" onmouseover="pauseTicker_Testimony()" onmouseout="restartTicker_Testimony()">
+  <img src="images/customers/arcTech.png" class="float_left">
+  <p class="float_right">
+    <em>&quot;ARC Technologies has been using USAi.net for more than five years, and we have been very happy with them. Our wireless Internet connection offers consistent performance and excellent reliability. Technical support is easy to reach, willing and able to help, and extremely responsive. No run around, no recordings, no help desk seven states away. If trouble does occur, we at least know what and why and when. That&#39;s something you just won't get from the giant telephone and cable companies.&quot;</em><br>
+    &#45; Ben Scott
+  </p>
+</div>

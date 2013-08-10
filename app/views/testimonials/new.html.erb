@@ -1,0 +1,32 @@
+<%= render :partial => 'admin/admin_nav' %>
+
+<div id="subMain">
+<h1>New Testimonial</h1>
+<% form_for @testimonial do |f| %>
+<table>
+	<tr>
+	  <th align="right">Type:</th>
+	  <td>
+	   <select name="testimonial[is_client]">
+	     <option value="1">Client</option>
+	     <option value="0">Partner</option>
+	   </select>
+	  </td>
+	</tr><tr>
+		<th align="right">Author:</th>
+		<td><%= f.text_field :author %></td>
+	</tr><tr>
+		<th align="right">Image URL:</th>
+		<td><%= f.text_field :imageURL %></td>
+	</tr><tr>
+		<th align="right">Link:</th>
+		<td><%= f.text_field :link %></td>
+	</tr><tr>
+		<th align="right" valign="top">Quote:</th>
+		<td><%= f.text_area :quote %></td>
+	</tr><tr>
+		<td colspan=2 align="right"><%= submit_tag "Create Testimonial" %></td>
+	</tr>
+</table>
+<% end %>
+</div>

@@ -1,0 +1,32 @@
+<%= render :partial => "admin/admin_nav" %>
+
+<div id="subMain">
+<h1>Create News Item</h1>
+<% form_for @news_item do |f| %>
+<table>
+	<tr>
+		<th align="right"><label for="title">Title:</label></th>
+		<td><%= f.text_field :title %></td>
+	</tr><tr>
+		<th align="right" valign="top"><label for="title">Description:</label></th>
+		<td><%= f.text_area :description, :cols => 100 ,:rows => 5 %></td>
+	</tr><tr>
+		<td align="right"><%= f.check_box :published %></td>
+		<td>Published. <em>(Unpublished articles are not viewable by the end user)</em></td>
+	</tr><tr>
+		<td colspan=2 align="right">
+			<%= link_to "Generate a Link",
+						"javascript:void(0)",
+						{:onclick => visual_effect(:toggle_appear, "modal_float")} %>
+		</td>
+	</tr><tr>
+		<th align="right" valign="top"><label for="title">Article:</label></th>
+		<td><%= f.text_area :article, :cols => 100 %></td>
+	</tr><tr>
+		<td colspan=2 align="right"><%= submit_tag "Create News Item" %></td>
+	</tr>
+</table>
+<% end %>
+</div>
+
+<%= render :partial => 'admin/link_generator' %>

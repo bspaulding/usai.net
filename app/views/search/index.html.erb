@@ -1,0 +1,16 @@
+<h1>Search Results for '<span id="query" style="font-style:italic;"><%= @query %></span>'</h1>
+<div id="spinner" style="position:fixed;top:25px;left:25px;"><img src="/images/spinner.gif"></div>
+<div id="search_results" style="display:none;">
+<ul>
+<% for result in @results %>
+	<li>
+	 <%= link_to result.name, result, :title => result.category.description %> (<%= result.ferret_score.round(4)*100 %>%)
+  </li>
+<% end %>
+</ul>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+<%= visual_effect :blind_down, "search_results", {:queue => "front"} %>
+<%= visual_effect :fade, "spinner", {:queue => "end"} %>
+</script>
