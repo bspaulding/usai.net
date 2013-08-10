@@ -17,12 +17,12 @@ class CategoriesController < ApplicationController
 						:extended_valid_elements => "form[*],input[*],option[*],select[*],script[*],embed[*],object[*]",
 						:cleanup => false},
 					:only => [:new, :edit])
-	
+
 	def index
 		if params[:section_id]
-			category = Category.find(:first, :conditions => ['section_id = ?', params[:section_id]])
+			category = Category.first(:conditions => ['section_id = ?', params[:section_id]])
 		else
-			category = Category.find(:first)
+			category = Category.first
 		end
 		redirect_to category.pages.first
 	end
@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def new
-		@sections = Section.find(:all)
+		@sections = Section.all
 		@category = session[:category_draft] || Category.new
 	end
 
@@ -60,7 +60,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def edit
-		@sections = Section.find(:all)
+		@sections = Section.all
 		begin
 			@category = Category.find(params[:id])
 		rescue ActiveRecord::RecordNotFound
@@ -69,17 +69,17 @@ class CategoriesController < ApplicationController
 			redirect_to :action => :index
 		end
 	end
-	
+
 	def update
 		@category = Category.find(params[:id])
 		if @category.update_attributes(params[:category])
 			flash[:notice] = "Successfully Updated Category."
 			redirect_to @category
-		else 
+		else
 			render :action => 'edit'
 		end
 	end
-	
+
 	def sort
 		@section = Section.find(params[:id])
 		for category in @section.categories
@@ -90,11 +90,11 @@ class CategoriesController < ApplicationController
 			page.visual_effect :highlight, "section_#{@section.id}_category_list"
 		end
 	end
-	
+
 	def save_draft
 		session[:category_draft] = Category.new(params[:category])
 	end
-	
+
 	def destroy
 		# Category.delete(params[:id])
 		flash[:notice] = "At this time you are not allowed to delete categories, only change their names."
