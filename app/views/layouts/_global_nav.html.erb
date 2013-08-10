@@ -1,5 +1,5 @@
 <ul>
-	<% Section.find(:all, :order => :position).each do |section| %>
+	<% Section.all(:order => :position).each do |section| %>
 	  <% if section.name == "Support Center" %>
 	  <li><%= link_to section.name, "http://support.usai.net" %></li>
 	  <% else %>
