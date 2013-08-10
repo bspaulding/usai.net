@@ -1,7 +1,7 @@
 class AddPublishedStatusToPages < ActiveRecord::Migration
   def self.up
   	add_column :pages, :published, :boolean
-  	Page.update_all("published = true")
+  	Page.all.each {|page| page.update_attribute("published", true) }
   end
 
   def self.down
