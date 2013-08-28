@@ -13,4 +13,7 @@
 			</td>
 		</tr>
 	</table>
+  <% if session[:user] %>
+    <%= link_to 'Edit this testmonial', { :controller => 'testimonials', :action => 'edit', :id => testimonial_img_left.id }, :class => 'edit-link' %>
+  <% end %>
 </div>
