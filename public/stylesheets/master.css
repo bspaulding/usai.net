@@ -136,7 +136,7 @@ h1 {
 	height: 20px;
 	display: block;
 	text-align: center;
-	width: 160px;
+	width: 130px;
 	float: left;
 	font-size: .9em;
 	font-family: "Times New Roman", Arial;
@@ -160,7 +160,7 @@ h1 {
 	border-left-width: 1px;
 	display: block;
 	background-color: #6c9cfb;
-	width: 158px;
+	width: 128px;
 	color: white;
 }
 
@@ -175,7 +175,7 @@ h1 {
 	display: block;
 	padding-top: 2px;
 	background-color: white;
-	width: 158px;
+	width: 128px;
 	color: #6c9cfb;
 }
 
