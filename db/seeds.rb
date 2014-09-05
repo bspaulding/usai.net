@@ -6,7 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-['Services', 'Support Center', 'Coverage', 'Contact Info', 'About Us'].each do |section_name|
+['Services', 'Support Center', 'Coverage', 'Contact Info', 'About Us', 'Webmail'].each do |section_name|
   Section.create!(:name => section_name)
 end
 
